@@ -1,0 +1,25 @@
+<div>
+  <ion-buttons class="btnWrapper">
+    <ion-button (click)="setModalOpen(true)" expand="block" class="addBtn" fill="solid" color="primary">Add Todo</ion-button>
+  </ion-buttons>
+  <ion-modal [isOpen]="isNewTodoModalOpen" (willDismiss)="onModalDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar class="toolbar">
+          <ion-button slot="start" (click)="cancel()">Cancel</ion-button>
+          <ion-title class="title">Create Todo</ion-title>
+          <ion-button slot="end" (click)="save()">Save</ion-button>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="input-wrapper">
+          <ion-input label="Title:" [(ngModel)]="newTodo.title" name="title" fill="outline" class="input" [clearInput]="true"></ion-input>
+          <ion-input label="Description:" [(ngModel)]="newTodo.content" name="description" fill="outline" class="input" [clearInput]="true"></ion-input>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <div class="todoWrapper">
+    <app-todo-list-item *ngFor="let todo of List$ | async; let i = index" [title]="todo.title" [content]="todo.content" [checked]="todo.checked" [index]="i" class="todoItem"></app-todo-list-item>
+  </div>
+</div>
